@@ -21,18 +21,18 @@ We deliberately included Sam Dunning, who argues cold outreach alone is *underpe
 ## What's in here
 
 - [`research/sources.md`](research/sources.md) — all 10 experts: links, roles, dates checked, and why each was picked.
-- [`research/linkedin-posts/`](research/linkedin-posts/) — individual LinkedIn posts, fetched and annotated, organized by author.
-- [`research/youtube-transcripts/`](research/youtube-transcripts/) — video references for the YouTube-first creators. **Note:** verbatim caption/transcript extraction was blocked at the network level in this environment (YouTube's `timedtext` API, `yt-dlp`, and `youtube-transcript-api` all returned HTTP 429 "unusual traffic" — confirmed with three independent tools, not a one-off rate limit). Each entry instead pairs the video reference with that same creator's own written version of the material (blog post, podcast show notes, or LinkedIn article), clearly labeled as a substitute. Getting true verbatim transcripts is the first thing to redo once transcript API access (e.g., a Supadata key) is available.
+- [`research/linkedin-posts/`](research/linkedin-posts/) — individual LinkedIn posts, fetched and annotated, organized by author. Covers 9 of 10 experts (Sam Dunning's primary channel is podcast/blog, already covered under `other/`).
+- [`research/youtube-transcripts/`](research/youtube-transcripts/) — verbatim auto-caption transcripts pulled via [Supadata](https://supadata.ai/) API, organized by creator. Each subfolder contains real transcript `.md` files plus an earlier supplementary-notes file (kept for context). Creators covered: Alex Berman (2 videos), Morgan J Ingram (Lemlist webinar), 30MPC/Nick Cegelski & Armand Farrokh (Sales Development Podcast appearance), Patrick Dang, Will Aitken.
 - [`research/other/`](research/other/) — agency blog posts and podcast show notes that didn't fit the LinkedIn/YouTube split but are primary-source material from the same 10 experts.
 
 ## How material was collected
 
-- LinkedIn posts: fetched directly from public post URLs surfaced via web search.
-- Articles/blog/show notes: fetched directly from the practitioner's or their agency's own site.
-- YouTube: video metadata gathered via search; transcript extraction attempted via `youtube-transcript-api`, `yt-dlp` (multiple client configs), and direct calls to YouTube's `timedtext` endpoint — all blocked (see limitation above).
+- **LinkedIn posts:** fetched directly from public post URLs surfaced via web search, using WebFetch on public post pages.
+- **Articles/blog/show notes:** fetched directly from the practitioner's or their agency's own site.
+- **YouTube transcripts:** pulled via [Supadata](https://supadata.ai/) transcript API against specific video IDs (auto-captions). Initial attempts via `youtube-transcript-api`, `yt-dlp`, and YouTube's `timedtext` endpoint all returned HTTP 429 from the build environment's shared IP — resolved by switching to Supadata.
 
 ## Next steps toward a real playbook
 
-1. Re-attempt YouTube transcript collection from an unblocked network/with a transcript API key.
-2. Add 2-3 more LinkedIn posts per author to triangulate consistent advice vs. one-off takes.
-3. Cross-reference where these 10 agree vs. disagree (e.g., Dang says email isn't dead, Dunning says cold outreach is underperforming) and build the playbook around resolving that tension with current data, not picking a side a priori.
+1. Add 2–3 more LinkedIn posts per author to triangulate consistent advice vs. one-off takes.
+2. Cross-reference where these 10 agree vs. disagree (e.g., Dang says cold email isn't dead, Dunning says cold outreach is underperforming) and build the playbook around resolving that tension with current data.
+3. Pull transcripts for Sam Dunning's Breaking B2B episodes on outbound (podcast, not just blog) to round out his coverage.
